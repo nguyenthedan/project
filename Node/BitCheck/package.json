@@ -1,0 +1,13 @@
+{
+  "name": "BitCheck",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "binance-api-node": "*",
+    "node-telegram-bot-api": "*"
+  }
+}

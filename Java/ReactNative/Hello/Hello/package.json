@@ -8,13 +8,18 @@
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "0.53.0"
+    "react-native": "0.53.0",
+    "react-native-router-flux": "*",
+    "react-native-vector-icons": "*"
   },
   "devDependencies": {
     "babel-jest": "22.2.2",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.3.0",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "flow-bin": "*",
+    "babel-cli": "*",
+    "babel-preset-flow": "*"
   },
   "jest": {
     "preset": "react-native"

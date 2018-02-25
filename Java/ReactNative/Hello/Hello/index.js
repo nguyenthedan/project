@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import setup from './KeepMyFolio/setup';
 
-AppRegistry.registerComponent('Hello', () => App);
+AppRegistry.registerComponent('Hello',  setup)
