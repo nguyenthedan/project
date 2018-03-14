@@ -1,7 +1,9 @@
-package com.example.blog.services;
+package com.example.blog.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.blog.services.NotificationService;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;

@@ -1,6 +1,8 @@
-package com.example.blog.services;
+package com.example.blog.services.impl;
 
 import org.springframework.stereotype.Service;
+
+import com.example.blog.services.LoginService;
 
 import java.util.Objects;
 

@@ -11,6 +11,10 @@
 	th:src="@{/js/jquery-3.1.0.min.js}"></script>
 <script src="../public/js/blog-scripts.js"
 	th:src="@{/js/blog-scripts.js}"></script>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
 <!-- <meta th:include="this :: head" th:remove="tag" /> -->
 </head>
 
@@ -34,23 +38,34 @@
 			</div>
 		</div>
 
-<!-- 		<ul id="messages" -->
-<!-- 			th:with="notifyMessages=${session[T(blog.services -->
-<!--           .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}"> -->
-<!-- 			<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" -->
-<!-- 				th:class="${#strings.toLowerCase(msg.type)}"></li> -->
-<!-- 			<span th:if="${notifyMessages}" th:remove="all" -->
-<!-- 				th:text="${session.remove( -->
-<!--           T(blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span> -->
-<!-- 		</ul> -->
+		<!-- 		<ul id="messages" -->
+		<!-- 			th:with="notifyMessages=${session[T(blog.services -->
+		<!--           .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}"> -->
+		<!-- 			<li th:each="msg : ${notifyMessages}" th:text="${msg.text}" -->
+		<!-- 				th:class="${#strings.toLowerCase(msg.type)}"></li> -->
+		<!-- 			<span th:if="${notifyMessages}" th:remove="all" -->
+		<!-- 				th:text="${session.remove( -->
+		<!--           T(blog.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span> -->
+		<!-- 		</ul> -->
 	</header>
 
 
 	<h1>Welcome</h1>
 	<p>Welcome to the Spring MVC Blog.</p>
 
-	<footer th:fragment="site-footer"> &copy; Spring MVC Blog
-		System, 2016 </footer>
+	<footer th:fragment="site-footer">
+		<div class="container">
+			<p class="muted credit">Spring MVC/Thymeleaf/Bootstrap Project
+				Template by Craig Walls.</p>
+		</div>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+			th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+			th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	</footer>
 </body>
 
 </html>

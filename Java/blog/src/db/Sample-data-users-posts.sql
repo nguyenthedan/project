@@ -46,3 +46,33 @@ INSERT INTO `posts` (`id`, `author_id`, `title`, `body`, `date`) VALUES
 	(28, 6, 'Attention Agile Organizations: Alignment = Better Decision Making', 'A frequent complaint we hear from Agile teams is that their self-organization is not respected and their manager routinely overrules their decisions. If you talk to the manager, he or she complains that the team doesn’t respect company policies anymore and makes decisions it’s not entitled to make. What seems to be a battle about power in many cases and like a confusion of self-organization with autonomy turns out to be an unfinished Agile integration into the organization.', '2016-05-31 00:00:00'),
 	(29, 2, 'Call for Papers: Business-Driven Digital Transformation', 'Digital transformation is at the top of many executive agendas and organizations are investing substantial resources to make it happen. While there may be internal benefits such as efficiency gains, the primary driver for digital transformation is the customer. Customers are now in the driver’s seat with high expectations demanding what they want, when they want it, and how they want it – and they will go elsewhere to find it if not satisfied. Years of growth and change have created tremendous complexity and redundancy in large enterprises. This complexity has become more transparent to the customer and so improving the customer experience and achieving true digital transformation requires significant changes to the business and IT environment. Organizations also need to prepare themselves to adapt to future strategic and operational changes more quickly as the pace of change is only increasing.', '2016-05-24 00:00:00'),
 	(30, 1, 'EA’s Role in the Innovation Management Process', 'By asking the CEOs of some of the most successful and influential companies in the world, such as GE and Google, a clear definition of innovation manage­ment emerges. The definition addresses the need to quickly and effectively implement organizational goals and objectives to remain competitive and the desire to strengthen advantages through the adoption of innovative ideas, products, processes, and business models. Enterprises facing increasing competition and the pressure of techno­logical innovation are beginning to realize that to drive organic business growth and maintain a competitive advantage, they need to discover and imple­ment innovation quickly and with great care to ensure maximum value. One-off innovations are moderately easy to take advantage of, but to create a pipeline of innovative ideas that materially impacts the growth of an organization, it is critical to nurture an innovation management proc­ess that can be sustained and that can remain flexible and adjustable to accommodate changes in the competitive environment. Today’s enterprises need to manage and govern the process of innovation; it is a crucial facet of a company’s overall function.', '2016-05-03 00:00:00');
+	
+	
+create
+	table
+		`role`(
+			`role_id` int(11) not null AUTO_INCREMENT,
+			`role` varchar(255) default null,
+			primary key(`role_id`)
+		) ENGINE = InnoDB AUTO_INCREMENT = 2 default CHARSET = utf8;
+		
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `active` bit(1) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `fullName` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_role` (
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
+  CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `role` VALUES (1,'ADMIN');

@@ -1,4 +1,4 @@
-package com.example.blog.services;
+package com.example.blog.services.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.blog.models.Post;
 import com.example.blog.repositories.PostRepository;
+import com.example.blog.services.PostService;
 
 @Service
 @Primary
@@ -29,7 +30,7 @@ public class PostServiceJpaImpl implements PostService {
     @Override
     public Post findById(Long id) {
 //        return this.postRepo.findOne(id);
-    	return null;
+    	return postRepo.findById(id).get();
     }
 
     @Override
