@@ -42,8 +42,8 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
-    @OneToMany(mappedBy = "author")
-    private Set<Post> posts = new HashSet<Post>();
+//    @OneToMany(mappedBy = "author")
+//    private Set<Post> posts = new HashSet<Post>();
 
     public Long getId() {
         return id;
@@ -93,13 +93,13 @@ public class User {
 		this.active = active;
 	}
 
-	public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
+//	public Set<Post> getPosts() {
+//        return posts;
+//    }
+//
+//    public void setPosts(Set<Post> posts) {
+//        this.posts = posts;
+//    }
     
     public Set<Role> getRoles() {
         return roles;

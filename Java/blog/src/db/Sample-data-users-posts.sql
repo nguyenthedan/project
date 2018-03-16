@@ -76,3 +76,15 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `role` VALUES (1,'ADMIN');
+
+CREATE TABLE `posts` (
+  `id`              int(11)      NOT NULL AUTO_INCREMENT,
+  `title`           VARCHAR(200),
+  `body`            LONGTEXT,
+  `date`      DATETIME    NOT NULL,
+  `author_id` int(11) NOT null,
+  PRIMARY KEY (`id`),
+  foreign key (`author_id`) references `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+wallride-master

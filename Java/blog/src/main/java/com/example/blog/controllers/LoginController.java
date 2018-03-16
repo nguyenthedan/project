@@ -20,24 +20,24 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login");
+		modelAndView.setViewName("users/login");
 		return modelAndView;
 	}
 	
 	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
+	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public ModelAndView registration(){
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
 		modelAndView.addObject("user", user);
-		modelAndView.setViewName("registration");
+		modelAndView.setViewName("users/register");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByEmail(user.getEmail());
@@ -47,12 +47,12 @@ public class LoginController {
 							"There is already a user registered with the email provided");
 		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("users/register");
 		} else {
 			userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
 			modelAndView.addObject("user", new User());
-			modelAndView.setViewName("registration");
+			modelAndView.setViewName("users/register");
 			
 		}
 		return modelAndView;

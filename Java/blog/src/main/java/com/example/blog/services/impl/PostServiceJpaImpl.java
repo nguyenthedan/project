@@ -23,13 +23,7 @@ public class PostServiceJpaImpl implements PostService {
     }
 
     @Override
-    public List<Post> findLatest5() {
-        return this.postRepo.findLatest5Posts();
-    }
-
-    @Override
     public Post findById(Long id) {
-//        return this.postRepo.findOne(id);
     	return postRepo.findById(id).get();
     }
 

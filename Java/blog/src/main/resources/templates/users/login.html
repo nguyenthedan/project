@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!-- <head th:replace="layout :: site-head"> -->
-<!--     <title>Login</title> -->
+<!-- <head> -->
+<!-- 	<title>Spring Security Tutorial</title> -->
+<!-- 	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" /> -->
+<!-- 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!--   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+<!--   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <!-- </head> -->
+<head th:replace="layout :: site-head"></head>
 
 <body>
+	<header th:replace="layout :: site-header"></header>
 
-<!-- <header th:replace="layout :: site-header" /> -->
+	<div class="container">
+		<img th:src="@{/images/login.jpg}" class="img-responsive center-block"
+			width="300" height="300" alt="Logo" />
+		<form th:action="@{/login}" method="POST" class="form-signin">
+			<h3 class="form-signin-heading" th:text="Welcome"></h3>
+			<br /> <input type="text" id="email" name="email"
+				th:placeholder="Email" class="form-control" /> <br /> <input
+				type="password" th:placeholder="Password" id="password"
+				name="password" class="form-control" /> <br />
 
-<h2>Please login</h2>
-<form method="post" th:object="${loginForm}">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username"
-           th:value="*{username}" />
-    <span class="formError"
-          th:if="${#fields.hasErrors('username')}"
-          th:errors="*{username}">Invalid username</span>
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email or Password
+					invalid, please verify</p>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit"
+				value="Login" type="Submit" th:text="Login"></button>
+		</form>
+	</div>
 
-    <br />
-
-    <label for="password">Password:</label>
-    <input type="text" id="password" name="password"
-           th:value="*{password}"/>
-    <span class="formError"
-          th:if="${#fields.hasErrors('password')}"
-          th:errors="*{password}">Invalid password</span>
-
-    <br />
-    <input type="submit" value="Login" />
-</form>
-
-<!-- <footer th:replace="layout :: site-footer" /> -->
-
+	<footer th:replace="layout :: site-footer"></footer>
 </body>
-
 </html>
-
