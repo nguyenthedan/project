@@ -1,7 +1,10 @@
 package com.example.blog.models;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +34,11 @@ public class Post {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id")
 	private User author;
+	
+	@OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "post")
+    private Set<Comment> comments = new HashSet<>();
 
 	@Column(nullable = false)
 	private Date date = new Date();

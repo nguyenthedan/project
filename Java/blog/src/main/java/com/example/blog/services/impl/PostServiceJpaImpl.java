@@ -29,7 +29,7 @@ public class PostServiceJpaImpl implements PostService {
 
     @Override
     public Post create(Post post) {
-        return null;
+        return postRepo.save(post);
     }
 
     @Override

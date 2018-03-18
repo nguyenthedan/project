@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head"></head>
+
+<body>
+	<header th:replace="layout :: site-header"></header>
+
+	<form th:action="@{/posts/create}" th:object="${post}" method="POST">
+		<h3>Create post</h3>
+		<div>
+			<input type="text" th:field="*{title}" th:placeholder="Title"
+				class="form-control" />
+		</div>
+		<div>
+			<input type="text" th:field="*{body}" th:placeholder="Content"
+				class="form-control" />
+		</div>
+
+		<button class="btn btn-lg btn-primary btn-block" name="Submit"
+			value="Submit" type="Submit" th:text="Post"></button>
+	</form>
+
+	<footer th:replace="layout :: site-footer"></footer>
+</body>
+
+</html>
+
