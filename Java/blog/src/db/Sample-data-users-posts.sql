@@ -87,4 +87,14 @@ CREATE TABLE `posts` (
   foreign key (`author_id`) references `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `comments` (
+  `id`              int(11)      NOT NULL AUTO_INCREMENT,
+  `text`            LONGTEXT,
+  `post_id` int(11) NOT null,
+  PRIMARY KEY (`id`),
+  foreign key (`post_id`) references `posts` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 wallride-master

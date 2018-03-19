@@ -2,28 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: site-head">
-    <title th:text="${post.title}">Post Details</title>
+<title th:text="${post.title}">Post Details</title>
 </head>
 
 <body>
-<header th:replace="layout :: site-header" />
+	<header th:replace="layout :: site-header"></header>
 
-<main id="posts">
-    <article>
-        <h2 class="title" th:text="${post.title}">Post Title</h2>
-        <div class="date">
-            <i>Posted on</i>
-            <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-            <span th:if="${post.author}" th:remove="tag">
-                    <i>by</i> <span th:text="${post.author.fullName != null ?
-                        post.author.fullName : post.author.username}">Svetlin Nakov</span>
-                </span>
-        </div>
-        <p class="content" th:utext="${post.body}">Post content</p>
-    </article>
-</main>
+	<main id="posts">
+	<article>
+		<h2 class="title" th:text="${post.title}">Post Title</h2>
+		<div class="date">
+			<i>Posted on</i> <span
+				th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+			<span th:if="${post.author}" th:remove="tag"> <i>by</i> <span
+				th:text="${post.author.fullName != null ?
+                        post.author.fullName : post.author.username}">Svetlin
+					Nakov</span>
+			</span>
+		</div>
+		<p class="content" th:utext="${post.body}">Post content</p>
+	</article>
+	</main>
 
-<footer th:replace="layout :: site-footer" />
+	<div id="comment">
+		<h2>Comment</h2>
+		<div th:each="comment : ${post.comments}">
+			<span th:text="${comment.text}"></span>
+		</div>
+
+		<form th:action="@{'/posts/' + ${post.id} + '/addComment'}"
+			th:object="${comment}" method="POST">
+			<h3>Create post</h3>
+			<div>
+				<input type="text" th:field="*{text}" th:placeholder="Comment"
+					class="form-control" />
+			</div>
+
+			<button class="btn btn-lg btn-primary btn-block" name="Submit"
+				value="Submit" type="Submit" th:text="Submit"></button>
+		</form>
+	</div>
+
+	<footer th:replace="layout :: site-footer"></footer>
 </body>
 
 </html>

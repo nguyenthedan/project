@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.blog.models.Comment;
 import com.example.blog.models.Post;
 import com.example.blog.repositories.PostRepository;
 import com.example.blog.services.PostService;

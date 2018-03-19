@@ -83,6 +83,14 @@ public class Post {
 		this.date = date;
 	}
 
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public Post() {
 	}
 
