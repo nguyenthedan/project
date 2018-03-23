@@ -20,6 +20,10 @@
 					Nakov</span>
 			</span>
 		</div>
+		<h2>Tag</h2>
+		<div th:each="tag : ${post.tags}">
+			<span th:text="${tag.name}"></span>
+		</div>
 		<p class="content" th:utext="${post.body}">Post content</p>
 	</article>
 	</main>

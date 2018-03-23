@@ -12,14 +12,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "posts")
-public class Post {
+	@Entity
+	@Table(name = "posts")
+	public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -39,6 +41,20 @@ public class Post {
             fetch = FetchType.LAZY,
             mappedBy = "post")
     private Set<Comment> comments = new HashSet<>();
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "posts_tags",
+            joinColumns = @JoinColumn(name = "post_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
+	private Set<Tag> tags = new HashSet<>();
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
 
 	@Column(nullable = false)
 	private Date date = new Date();
