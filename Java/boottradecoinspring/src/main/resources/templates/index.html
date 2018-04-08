@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head"></head>
+
+<body>
+	<header th:replace="layout :: site-header"></header>
+
+	<div class="container">
+		<div class="row">
+			<form th:action="@{/api/sell}" id="form-sell" method="POST" class="col-md-4">
+				<div class="form-group">
+					<label>Pair</label> <input type="text" class="form-control"
+						id="pair" name="pair" placeholder="ETHBTC"> <label>Price
+						Above</label> <input type="number" class="form-control"
+						id="sellPriceAbove" name="sellPriceAbove" placeholder="BTC">
+					<label>Price Below</label> <input type="number"
+						class="form-control" id="sellPriceBelow" name="sellPriceBelow"
+						placeholder="BTC"> <label>Amount</label> <input
+						type="number" class="form-control" id="amount" name="amount"
+						placeholder="BTC"> <label>Total</label> <input
+						type="number" class="form-control" id="total" disabled="disabled"
+						placeholder="BTC">
+
+					<button type="submit" class="btn btn-block btn-danger"
+						style="margin-top: 20px">Sell</button>
+				</div>
+			</form>
+
+			<div id="posts">
+				<article th:each="p : ${listPosts}">
+					<h2 class="title">
+						<a th:href="@{'/posts/view/' + ${p.id}}" th:text="${p.title}">Post
+							Title</a>
+					</h2>
+					<div class="date">
+						<i>Posted on</i> <span
+							th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+						<span th:if="${p.author}" th:remove="tag"> <i>by</i> <span
+							th:text="${p.author.fullName != null ?
+                         p.author.fullName : p.author.username}">Svetlin
+								Nakov</span>
+						</span>
+					</div>
+					<p class="content" th:utext="${p.body}">Post content</p>
+				</article>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout :: site-footer"></footer>
+</body>
+
+</html>
+
