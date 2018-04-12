@@ -5,60 +5,51 @@ import java.math.BigDecimal;
 public class Detail {
     private String symbol;
     private BigDecimal currentPrice;
-    private BigDecimal sellPriceAbove;
-    private BigDecimal sellPriceBelow;
-    private BigDecimal buyPriceAbove;
-    private BigDecimal buyPriceBelow;
+    private BigDecimal priceAbove;
+    private BigDecimal priceBelow;
+    private BigDecimal amount;
 
-    public String getSymbol() {
-        return this.symbol;
-    }
+    public BigDecimal getAmount() {
+		return amount;
+	}
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
 
-    public BigDecimal getCurrentPrice() {
-        return this.currentPrice;
-    }
+	public String getSymbol() {
+		return symbol;
+	}
 
-    public void setCurrentPrice(BigDecimal currentPrice) {
-        this.currentPrice = currentPrice;
-    }
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
 
-    public BigDecimal getSellPriceAbove() {
-        return this.sellPriceAbove;
-    }
+	public BigDecimal getCurrentPrice() {
+		return currentPrice;
+	}
 
-    public void setSellPriceAbove(BigDecimal sellPriceAbove) {
-        this.sellPriceAbove = sellPriceAbove;
-    }
+	public void setCurrentPrice(BigDecimal currentPrice) {
+		this.currentPrice = currentPrice;
+	}
 
-    public BigDecimal getSellPriceBelow() {
-        return this.sellPriceBelow;
-    }
+	public BigDecimal getPriceAbove() {
+		return priceAbove;
+	}
 
-    public void setSellPriceBelow(BigDecimal sellPriceBelow) {
-        this.sellPriceBelow = sellPriceBelow;
-    }
+	public void setPriceAbove(BigDecimal priceAbove) {
+		this.priceAbove = priceAbove;
+	}
 
-    public BigDecimal getBuyPriceAbove() {
-        return this.buyPriceAbove;
-    }
+	public BigDecimal getPriceBelow() {
+		return priceBelow;
+	}
 
-    public void setBuyPriceAbove(BigDecimal buyPriceAbove) {
-        this.buyPriceAbove = buyPriceAbove;
-    }
+	public void setPriceBelow(BigDecimal priceBelow) {
+		this.priceBelow = priceBelow;
+	}
 
-    public BigDecimal getBuyPriceBelow() {
-        return this.buyPriceBelow;
-    }
-
-    public void setBuyPriceBelow(BigDecimal buyPriceBelow) {
-        this.buyPriceBelow = buyPriceBelow;
-    }
-
-    @Override
+	@Override
     public boolean equals(Object obj) {
         return ((Detail) obj).getSymbol().equals(this.symbol);
     }
