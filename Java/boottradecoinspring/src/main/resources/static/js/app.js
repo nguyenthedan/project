@@ -13,8 +13,8 @@ $( document ).ready(function() {
     	// PREPARE FORM DATA
     	var formData = {
     		pair : $("#pair").val(),
-    		sellPriceAbove :  $("#sellPriceAbove").val(),
-    		sellPriceBelow :  $("#sellPriceBelow").val(),
+    		priceAbove :  $("#priceAbove").val(),
+    		priceBelow :  $("#priceBelow").val(),
     		amount :  $("#amount").val()
     	}
     	
@@ -27,15 +27,11 @@ $( document ).ready(function() {
 			dataType : 'json',
 			success : function(result) {
 //				if(result.status == "Done"){
-//					$("#postResultDiv").html("<p style='background-color:#7FA7B0; color:white; padding:20px 20px 20px 20px'>" + 
-//												"Post Successfully! <br>" +
-//												"---> Customer's Info: FirstName = " + 
-//												result.data.firstname + " ,LastName = " + result.data.lastname + "</p>");
+				$("#tbl_posts").append("<tr><td><span class='sn'>1</span></td><td>"+result.pair+"</td><td>"+result.priceAbove+"</td><td>"+result.priceBelow+"</td><td>"+result.amount+"</td><td><a class='btn btn-xs delete-record' data-id='1'><i class='glyphicon glyphicon-trash'></i></a></td></tr>");
 //				}else{
 //					$("#postResultDiv").html("<strong>Error</strong>");
 //				}
 //				console.log(result);
-				console.log('POST: ' + result);
 			},
 			error : function(e) {
 				alert("Error!")
@@ -50,8 +46,8 @@ $( document ).ready(function() {
     
     function resetData(){
     	$("#pair").val("");
-    	$("#sellPriceAbove").val(null);
-    	$("#sellPriceBelow").val(null);
+    	$("#priceAbove").val(null);
+    	$("#priceBelow").val(null);
     	$("#amount").val(null);
     }
 })

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.boottradecoin.job.CheckPriceManager;
+import com.example.boottradecoin.model.Detail;
 import com.example.boottradecoin.model.FormSell;
 
 @RestController
@@ -13,8 +15,12 @@ import com.example.boottradecoin.model.FormSell;
 public class SellRestController {
 	@RequestMapping(value = "/sell", method = RequestMethod.POST)
 	public ResponseEntity<FormSell> addCoin(@RequestBody FormSell formSell) {
-//		return new ResponseEntity<>(HttpStatus.OK);
-		FormSell result = new FormSell();
-		return ResponseEntity.ok(result);
+		Detail coin = new Detail();
+		coin.setSymbol(formSell.getPair());
+		coin.setPriceAbove(formSell.getPriceAbove());
+		coin.setPriceBelow(formSell.getPriceBelow());
+		coin.setAmount(formSell.getAmount());
+		CheckPriceManager.listCoinCheck.add(coin);
+		return ResponseEntity.ok(formSell);
 	}
 }

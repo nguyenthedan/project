@@ -4,31 +4,31 @@ import java.math.BigDecimal;
 
 public class FormSell {
 	private String pair;
-    private BigDecimal sellPriceAbove;
-    private BigDecimal sellPriceBelow;
+    private BigDecimal priceAbove;
+    private BigDecimal priceBelow;
     private BigDecimal amount;
 	public String getPair() {
 		return pair;
 	}
-	public void setPair(String pair) {
-		this.pair = pair;
+	public BigDecimal getPriceAbove() {
+		return priceAbove;
 	}
-	public BigDecimal getSellPriceAbove() {
-		return sellPriceAbove;
+	public void setPriceAbove(BigDecimal priceAbove) {
+		this.priceAbove = priceAbove;
 	}
-	public void setSellPriceAbove(BigDecimal sellPriceAbove) {
-		this.sellPriceAbove = sellPriceAbove;
+	public BigDecimal getPriceBelow() {
+		return priceBelow;
 	}
-	public BigDecimal getSellPriceBelow() {
-		return sellPriceBelow;
-	}
-	public void setSellPriceBelow(BigDecimal sellPriceBelow) {
-		this.sellPriceBelow = sellPriceBelow;
+	public void setPriceBelow(BigDecimal priceBelow) {
+		this.priceBelow = priceBelow;
 	}
 	public BigDecimal getAmount() {
 		return amount;
 	}
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+	public void setPair(String pair) {
+		this.pair = pair;
 	}
 }

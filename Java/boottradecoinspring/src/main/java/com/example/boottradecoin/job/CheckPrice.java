@@ -1,61 +1,64 @@
 package com.example.boottradecoin.job;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimerTask;
 
+import com.binance.api.client.BinanceApiClientFactory;
+import com.binance.api.client.BinanceApiRestClient;
+import com.binance.api.client.domain.TimeInForce;
+import com.binance.api.client.domain.account.NewOrder;
+import com.binance.api.client.domain.account.NewOrderResponse;
+import com.binance.api.client.domain.account.Order;
+import com.binance.api.client.domain.account.request.CancelOrderRequest;
+import com.binance.api.client.domain.account.request.OrderRequest;
+import com.binance.api.client.domain.market.TickerPrice;
+import com.binance.api.client.exception.BinanceApiException;
 import com.example.boottradecoin.model.Detail;
-import com.webcerebrium.binance.api.BinanceApi;
-import com.webcerebrium.binance.api.BinanceApiException;
-import com.webcerebrium.binance.datatype.BinanceOrder;
-import com.webcerebrium.binance.datatype.BinanceOrderPlacement;
-import com.webcerebrium.binance.datatype.BinanceOrderSide;
-import com.webcerebrium.binance.datatype.BinanceOrderType;
-import com.webcerebrium.binance.datatype.BinanceSymbol;
 
 public class CheckPrice extends TimerTask {
 
-	BinanceApi binanceApi = new BinanceApi();
-    @Override
-    public void run() {
-    	Map<String, BigDecimal> priceMap = null;
-		try {
-			priceMap = binanceApi.pricesMap();
-		} catch (BinanceApiException e) {
-			e.printStackTrace();
+	BinanceApiClientFactory factory = BinanceApiClientFactory.newInstance("API-KEY", "SECRET");
+	BinanceApiRestClient client = factory.newRestClient();
+
+	@Override
+	public void run() {
+		List<TickerPrice> allPrices = client.getAllPrices();
+		Map<String, BigDecimal> mapPrices = new HashMap<>();
+		for (TickerPrice ticker : allPrices) {
+			mapPrices.put(ticker.getSymbol(), new BigDecimal(ticker.getPrice()));
 		}
-		
-		for(Detail coin : CheckPriceManager.listCoinCheck) {
-			BigDecimal currentPrice = priceMap.get(coin.getSymbol());
-			if(currentPrice.compareTo(coin.getPriceAbove()) > 0) {
+
+		for (Detail coin : CheckPriceManager.listCoinCheck) {
+			BigDecimal currentPrice = mapPrices.get(coin.getSymbol());
+			if (currentPrice.compareTo(coin.getPriceAbove()) > 0) {
 				// bán có lãi
 				try {
-					BinanceSymbol symbol = new BinanceSymbol(coin.getSymbol());
 					// hủy lệnh bán cắt lỗ
-					BinanceOrder order = binanceApi.allOrders(symbol).get(0);
-					binanceApi.deleteOrder(order);
-					
+					List<Order> openOrders = client.getOpenOrders(new OrderRequest(coin.getSymbol()));
+					client.cancelOrder(new CancelOrderRequest(coin.getSymbol(), openOrders.get(0).getOrderId()));
+
 					// đặt lệnh bán lãi
-					BinanceOrderPlacement placement = new BinanceOrderPlacement(symbol, BinanceOrderSide.SELL);
-					placement.setType(BinanceOrderType.LIMIT);
-					placement.setPrice(coin.getPriceAbove());
-					placement.setQuantity(coin.getAmount());
-					binanceApi.createOrder(placement);
+					NewOrderResponse newOrderResponse = client.newOrder(NewOrder.limitBuy(coin.getSymbol(), TimeInForce.GTC,
+							String.valueOf(coin.getAmount()), String.valueOf(coin.getPriceAbove())));
+					System.out.println(newOrderResponse);
 				} catch (BinanceApiException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-			} 
-//			else if(currentPrice.compareTo(coin.getPriceBelow()) < 0) {
-//				// bán cắt lỗ
-//				
-//			}
+
+			}
+			// else if(currentPrice.compareTo(coin.getPriceBelow()) < 0) {
+			// // bán cắt lỗ
+			//
+			// }
 		}
-    	
-//    	CheckPriceManager.listCoinCheck.forEach(coin -> {
-//    			priceMap.get(coin.getSymbol());
-//    	});
-    }
+
+		// CheckPriceManager.listCoinCheck.forEach(coin -> {
+		// priceMap.get(coin.getSymbol());
+		// });
+	}
 
 }
